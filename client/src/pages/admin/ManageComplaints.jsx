@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react'
 import { complaintAPI, departmentAPI } from '../../api'
 import StatusBadge from '../../components/StatusBadge'
 import toast from 'react-hot-toast'
-import { Search, Filter, RefreshCw, Trash2, UserCheck } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { Search, Filter, RefreshCw, Trash2, UserCheck, Eye } from 'lucide-react'
 
 const STATUSES = ['all', 'pending', 'open', 'assigned', 'inprogress', 'resolved', 'closed']
 
 export default function ManageComplaints() {
+  const navigate = useNavigate()
   const [complaints, setComplaints] = useState([])
   const [departments, setDepartments] = useState([])
   const [loading, setLoading] = useState(true)
@@ -93,15 +95,19 @@ export default function ManageComplaints() {
                 <tbody>
                   {filtered.map(c => (
                     <tr key={c._id} className="border-b border-border/50 hover:bg-bg-hover transition-colors">
-                      <td className="py-3 px-4 font-mono text-accent-blue text-xs">#{c.complaintId}</td>
+                      <td className="py-3 px-4 font-mono text-accent-blue text-xs cursor-pointer hover:underline" onClick={() => navigate(`/complaint/${c._id}`)}>#{c.complaintId}</td>
                       <td className="py-3 px-4 text-white">{c.category}</td>
-                      <td className="py-3 px-4 text-muted max-w-xs truncate">{c.description?.slice(0, 40)}...</td>
-                      <td className="py-3 px-4 text-muted">{c.user?.name || '—'}</td>
+                      <td className="py-3 px-4 text-muted max-w-xs truncate">{c.description ? c.description.slice(0, 60) + (c.description.length > 60 ? '…' : '') : '—'}</td>
+                      <td className="py-3 px-4 text-muted">{c.user?.name || c.user?.email || '—'}</td>
                       <td className="py-3 px-4 text-muted">{c.department?.name || <span className="text-yellow-500">Unassigned</span>}</td>
                       <td className="py-3 px-4"><StatusBadge status={c.status} /></td>
                       <td className="py-3 px-4 text-muted text-xs">{new Date(c.createdAt).toLocaleDateString()}</td>
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2">
+                          <button onClick={() => navigate(`/complaint/${c._id}`)}
+                            className="text-accent-green hover:text-green-400 transition-colors" title="View Details">
+                            <Eye size={14} />
+                          </button>
                           <button onClick={() => { setAssignModal(c); setAssignDept(c.department?._id || '') }}
                             className="text-accent-blue hover:text-blue-400 transition-colors" title="Assign">
                             <UserCheck size={14} />
