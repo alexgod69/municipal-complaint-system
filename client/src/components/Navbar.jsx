@@ -33,6 +33,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-6">
             {!user ? (
               <>
+                <Link to="/about" className="text-muted hover:text-white transition-colors text-sm">About</Link>
                 <Link to="/login" className="text-muted hover:text-white transition-colors text-sm">Login</Link>
                 <Link to="/register" className="btn-primary text-sm">Get Started</Link>
               </>
@@ -73,6 +74,7 @@ export default function Navbar() {
         <div className="md:hidden border-t border-border bg-bg-secondary px-4 py-4 space-y-3">
           {!user ? (
             <>
+              <Link to="/about" onClick={() => setOpen(false)} className="block text-muted hover:text-white text-sm">About</Link>
               <Link to="/login" onClick={() => setOpen(false)} className="block text-muted hover:text-white text-sm">Login</Link>
               <Link to="/register" onClick={() => setOpen(false)} className="block btn-primary text-sm text-center">Get Started</Link>
             </>

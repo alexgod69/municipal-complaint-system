@@ -14,6 +14,7 @@ import AdminDashboard  from './pages/admin/AdminDashboard'
 import ManageComplaints from './pages/admin/ManageComplaints'
 import UserManagement  from './pages/admin/UserManagement'
 import DeptDashboard   from './pages/department/DeptDashboard'
+import About           from './pages/About'
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/"        element={<Home />} />
+        <Route path="/about"   element={<About />} />
         <Route path="/login"   element={<Login />} />
         <Route path="/register" element={<Register />} />
 
