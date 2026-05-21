@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: mcms-server
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MONGO_URI
+        sync: false        # you'll paste Atlas URI in Render dashboard
+      - key: CLIENT_URL
+        sync: false        # you'll paste Netlify URL in Render dashboard
