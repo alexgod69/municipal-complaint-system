@@ -51,4 +51,12 @@ export const analyticsAPI = {
   getStats: () => api.get('/analytics/stats'),
 }
 
+// Converts relative /uploads/... paths to full Render URL
+export const getMediaUrl = (path) => {
+  if (!path) return ''
+  if (path.startsWith('http')) return path
+  const base = import.meta.env.VITE_API_URL || ''
+  return `${base}${path}`
+}
+
 export default api

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { complaintAPI } from '../api'
+import { complaintAPI, getMediaUrl } from '../api'
 import StatusBadge from '../components/StatusBadge'
 import toast from 'react-hot-toast'
 import { ArrowLeft, MapPin, Calendar, Tag, MessageSquare, User } from 'lucide-react'
@@ -77,7 +77,7 @@ export default function ComplaintDetail() {
           </div>
 
           {complaint.imageUrl && (
-            <img src={complaint.imageUrl} alt="complaint" className="mt-4 rounded-lg max-h-64 object-cover border border-border" />
+            <img src={getMediaUrl(complaint.imageUrl)} alt="complaint" className="mt-4 rounded-lg max-h-64 object-cover border border-border" />
           )}
         </div>
 
